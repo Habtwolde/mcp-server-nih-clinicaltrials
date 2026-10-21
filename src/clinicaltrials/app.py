@@ -38,6 +38,11 @@ if __name__ == "__main__":
     # Otherwise fall back to stdio for local MCP clients (Claude Desktop, etc.).
     port_env = os.getenv("DATABRICKS_APP_PORT") or os.getenv("PORT")
     if port_env:
-        mcp.run(transport="http", host="0.0.0.0", port=int(port_env))
+        mcp.run(
+            transport="http",
+            host="0.0.0.0",
+            port=int(port_env),
+            stateless_http=True
+        )
     else:
         mcp.run(transport="stdio")
